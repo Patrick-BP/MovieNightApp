@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import {BrowserRouter, Routes, Route, Link} from 'react-router-dom'
+import MovieDetailsPage from './pages/MovieDetailsPage';
+import LoginPage from './pages/LoginPage';
 
 // import Nav from './Routes/Nav'
 
@@ -13,10 +15,11 @@ root.render(
   <BrowserRouter>
   {/* <Nav/> */}
   <Routes>
-  <Route path ='/' element={<App />}></Route>
-    {/* <Route path ='/users' element={<UserList />}></Route>
-    <Route path ='/users/add' element={<AddUser />}></Route>
-    <Route path ='/users/:id' element={<User  />}></Route>
+    <Route path ='/' element={<LoginPage />}></Route>
+  <Route path ='home' element={<App />}></Route>
+    <Route path ='movie/:movieId' element={<MovieDetailsPage />}></Route>
+  
+      {/* <Route path ='/users/:id' element={<User  />}></Route>
     <Route path ='/users/edit/:id' element={<EditUser/>}></Route> */}
    
     
