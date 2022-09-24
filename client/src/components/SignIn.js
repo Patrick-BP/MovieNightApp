@@ -28,7 +28,7 @@ const response = await axios.post('/login', login)
  
 }
 
-console.log(login);
+
 
     return ( 
         <>

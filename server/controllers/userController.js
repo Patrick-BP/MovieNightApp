@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/userModel");
+const Response = require("../models/responseobj");
 const { ObjectId } = require("mongodb");
 
 exports.getAllUsers = async (req, res) => {
@@ -21,7 +22,7 @@ exports.saveUser = async (req, res, next) => {
     const result = await new User(newUser).save();
     res.json(result);
   } catch (error) {
-    next(error);
+    res.status(400).json(new Response(true, "invalid format!", null));
   }
 };
 exports.updateOneUser = async (req, res) => {

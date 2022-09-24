@@ -1,9 +1,19 @@
 import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 import Nav from "./components/Nav";
 import "./App.css";
 import Movie from "./components/Movie";
-
+axios.defaults.baseURL = "http://localhost:3001";
 function App() {
+  const [movies, setMovies] = useState([]);
+  useEffect(() => {
+    (async function fetch() {
+      const moviesList = await axios.get("/movies");
+      setMovies(moviesList.data);
+    })();
+  }, []);
+  console.log(movies);
   return (
     <div className="">
       <div className="wrapper d-flex">
@@ -61,14 +71,11 @@ function App() {
 
           <div className=" heading">Trending Movies</div>
           <div className="d-flex result-wrpr">
-            <Movie />
-            <Movie />
-            <Movie />
-            <Movie />
-            <Movie />
-            <Movie />
-          </div>
-
+            {movies.map((movie)=>{
+              return <Movie trending={movie}/>
+            })
+            }
+</div>
           <div>
             <div className=" heading">Top Rated</div>
             <div className="d-flex result-wrpr">
@@ -134,7 +141,7 @@ function App() {
               <span>Animation</span>
             </div>
           </div>
-          <div >
+          <div>
             <span className="p-3">Popular Movies</span>
             <div className="popular__box">
               <a href="/movie/616037">

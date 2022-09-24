@@ -74,7 +74,7 @@ function MoviePlay() {
                       in one piece?
                     </p>
 
-                    <table class="table text-light">
+                    <table className="table text-light">
                       <tbody>
                         <tr>
                           <td>country:</td>
@@ -105,11 +105,11 @@ function MoviePlay() {
                   <span className="numOfCmnts">17</span>Comments:
                 </h4>
                 <div className="input-cmnt rounded-pill d-flex">
-                  <i class="fa-sharp fa-solid fa-circle-user user-icon"></i>
+                  <i className="fa-sharp fa-solid fa-circle-user user-icon"></i>
                   <textarea
                     type="text"
                     rows="1"
-                    class="form-control-plaintext"
+                    className="form-control-plaintext"
                     placeholder="Plaintext input"
                   />
                 </div>
@@ -117,28 +117,28 @@ function MoviePlay() {
                 <div>
                   
                   <div className="cmnt">
-                  <div class=" mb-5 mt-5">
+                  <div className=" mb-5 mt-5">
 			  
-        <div class="card">
-       <div class="row">
-         <div class="col-md-12">
+        <div className="card">
+       <div className="row">
+         <div className="col-md-12">
            
-           <div class="row">
-             <div class="col-md-12">
-               <div class="media">
-                 <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="https://i.imgur.com/stD0Q19.jpg" />
-                 <div class="media-body">
-                   <div class="row">
-                    <div class="col-8 d-flex name-fcmnt">
+           <div className="row">
+             <div className="col-md-12">
+               <div className="media">
+                 <img className="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="https://i.imgur.com/stD0Q19.jpg" />
+                 <div className="media-body">
+                   <div className="row">
+                    <div className="col-8 d-flex name-fcmnt">
                        <h5>Maria Smantha</h5>
                      <span>- 2 hours ago</span>
                     </div>
                     
-                    <div class="col-4">
+                    <div className="col-4">
                     
-                    <div class="pull-right reply">
+                    <div className="pull-right reply">
                     
-                   <a href="#"><span><i class="fa fa-reply"></i> reply</span></a>
+                   <a href="#"><span><i className="fa fa-reply"></i> reply</span></a>
                     
                     </div>
                     
@@ -147,12 +147,12 @@ function MoviePlay() {
                    
                    It is a long established fact that a reader will be distracted by the readable content of a page.
                                          
-                   <div class="media mt-4">
-                      <a class="pr-3" href="#"><img class="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/xELPaag.jpg" /></a>
-                     <div class="media-body">
+                   <div className="media mt-4">
+                      <a className="pr-3" href="#"><img className="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/xELPaag.jpg" /></a>
+                     <div className="media-body">
                          
-                       <div class="row">
-                    <div class="col-12 d-flex name-cmnt">
+                       <div className="row">
+                    <div className="col-12 d-flex name-cmnt">
                        <h5>Simona Disa</h5>
                      <span>- 3 hours ago</span>
                     </div>
@@ -164,11 +164,11 @@ function MoviePlay() {
                      </div>
                    </div>
                    
-                   <div class="media mt-3">
-                      <a class="pr-3" href="#"><img class="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/nAcoHRf.jpg" /></a>
-                     <div class="media-body">
-                         <div class="row">
-                    <div class="col-12 d-flex  name-cmnt">
+                   <div className="media mt-3">
+                      <a className="pr-3" href="#"><img className="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/nAcoHRf.jpg" /></a>
+                     <div className="media-body">
+                         <div className="row">
+                    <div className="col-12 d-flex  name-cmnt">
                        <h5>John Smith</h5>
                      <span>- 4 hours ago</span>
                     </div>
@@ -186,20 +186,20 @@ function MoviePlay() {
                
                
                
-               <div class="media mt-4 ">
-                 <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="https://i.imgur.com/xELPaag.jpg" />
-                 <div class="media-body">
-                   <div class="row">
-                    <div class="  col-8 d-flex name-fcmnt">
+               <div className="media mt-4 ">
+                 <img className="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="https://i.imgur.com/xELPaag.jpg" />
+                 <div className="media-body">
+                   <div className="row">
+                    <div className="  col-8 d-flex name-fcmnt">
                        <h5>Shad f</h5>
                      <span>- 2 hours ago</span>
                     </div>
                     
-                    <div class="col-4">
+                    <div className="col-4">
                     
-                    <div class="pull-right reply">
+                    <div className="pull-right reply">
                     
-                    <a href="#"><span><i class="fa fa-reply"></i> reply</span></a>
+                    <a href="#"><span><i className="fa fa-reply"></i> reply</span></a>
                     
                     </div>
                     
@@ -211,12 +211,12 @@ function MoviePlay() {
                    <div>
                     
                    </div>
-                   <div class="media mt-4 ">
-                      <a class="pr-3" href="#"><img class="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/nUNhspp.jpg" /></a>
-                     <div class="media-body">
+                   <div className="media mt-4 ">
+                      <a className="pr-3" href="#"><img className="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/nUNhspp.jpg" /></a>
+                     <div className="media-body">
                          
-                       <div class="row">
-                    <div class="col-12 d-flex  name-cmnt">
+                       <div className="row">
+                    <div className="col-12 d-flex  name-cmnt">
                        <h5>Andy flowe</h5>
                      <span>- 5 hours ago</span>
                     </div>
@@ -228,11 +228,11 @@ function MoviePlay() {
                      </div>
                    </div>
                    
-                   <div class="media mt-3">
-                      <a class="pr-3" href="#"><img class="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/HjKTNkG.jpg" /></a>
-                     <div class="media-body">
-                         <div class="row">
-                    <div class="col-12 d-flex  name-cmnt">
+                   <div className="media mt-3">
+                      <a className="pr-3" href="#"><img className="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/HjKTNkG.jpg" /></a>
+                     <div className="media-body">
+                         <div className="row">
+                    <div className="col-12 d-flex  name-cmnt">
                        <h5>Simp f</h5>
                      <span>- 5 hours ago</span>
                     </div>
@@ -245,11 +245,11 @@ function MoviePlay() {
                    </div>
                                          
                                          
-                                         <div class="media mt-3">
-                      <a class="pr-3" href="#"><img class="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/nAcoHRf.jpg" /></a>
-                     <div class="media-body">
-                         <div class="row">
-                    <div class="col-12 d-flex  name-cmnt">
+                                         <div className="media mt-3">
+                      <a className="pr-3" href="#"><img className="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/nAcoHRf.jpg" /></a>
+                     <div className="media-body">
+                         <div className="row">
+                    <div className="col-12 d-flex  name-cmnt">
                        <h5>John Smith</h5>
                      <span>- 4 hours ago</span>
                     </div>
