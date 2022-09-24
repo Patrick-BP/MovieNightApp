@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 
 function Movie({ trending }) {
-  console.log(trending);
-  const {} = trending
+ console.log(trending)
   return (
     <>
       <Link to="/movie/23">
@@ -20,7 +19,7 @@ function Movie({ trending }) {
             </svg>
           </div>
           <div className="overlay ">
-            <div className="movie-title">{title}</div>
+            <div className="movie-title">{}</div>
             <div className="d-flex flex-row  justify-content-between">
               <div className="text-size">2022</div>
               <div className=" text-size  text-warning">
