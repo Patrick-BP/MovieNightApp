@@ -7,10 +7,9 @@ const CommentSchema = new Schema({
     comment:String,
     parent_comment_id: String,
     movieId:String,
-    created_date: {type: Date ,  default : Date.now},
     isDeleted:{type:Boolean, default:false}
     
-}, {
+}, {timestamps:true,
     versionKey: false
 })
 

@@ -11,7 +11,7 @@ const UserSchema = new Schema({
 	role:{type:String, default:"user"},
 	imgUrl:String,
     isDeleted:{type:Boolean, default:false}
-}, {
+},{timestamps:true,
     versionKey: false
 });
 

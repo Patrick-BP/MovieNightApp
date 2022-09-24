@@ -7,7 +7,7 @@
 body {
   box-sizing: border-box;
   margin: 0;
-  transition: 0.3s;
+  transition: 0.3s !important;
 }
 html,
 body,
@@ -438,12 +438,12 @@ body {
   
 }
 a{
-text-decoration: none;
-color: white;
+text-decoration: none !important;
+color: white !important;
 }
 a:hover{
-  text-decoration: none;
-  color: white;
+  text-decoration: none !important;
+  color: white !important;
   }
 .video-div{
   margin: auto;

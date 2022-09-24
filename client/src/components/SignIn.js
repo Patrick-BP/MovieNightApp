@@ -4,6 +4,8 @@ import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:3001'
 function SignIn({LoginForms}) {
 const [login, setLogin]= useState({email:"", password:""})
+const [loginMsg, setLogimsg] =useState("")
+
 const navigate = useNavigate()
   function handleChange(e){
    
@@ -13,17 +15,20 @@ const navigate = useNavigate()
     e.preventDefault()
     try{
 const response = await axios.post('/login', login)
-    console.log(response.data.data.others._doc); 
+  console.log(response.data.data.others); 
+    setLogimsg("successfully loged in")
     localStorage.setItem('accessToken', response.data.data.accessToken);
       navigate('home')
     }catch(e){
-      console.log(e.response.data.message);
+      setLogimsg(e.response.data.message) ;
     }
     
     
 
  
 }
+
+console.log(login);
 
     return ( 
         <>
@@ -47,9 +52,10 @@ const response = await axios.post('/login', login)
                 name="email"
                 type="email"
                 placeholder="Email"
-                className="w-full bg-dark-lighten px-5 py-4 pr-12 rounded-xl outline-none peer text-white"
+                className="w-full bg-dark-lighten px-5 py-4 pr-12 rounded-xl outline-none peer text-white is-valid"
                 value={login.email}
                 onChange={handleChange}
+                required
               />
               <label
                 htmlFor="email"
@@ -77,9 +83,11 @@ const response = await axios.post('/login', login)
                 name="password"
                 type="password"
                 placeholder="Password"
-                className="w-full bg-dark-lighten px-5 py-4 pr-12 rounded-xl outline-none peer text-white"
-                value={login.password}
+                className="w-full bg-dark-lighten px-5 py-4 pr-12 rounded-xl outline-none peer text-white is-valid"
+                value={login.password} 
+                required
                 onChange={handleChange}
+               
               />
               <label
                 htmlFor="password"
@@ -103,18 +111,19 @@ const response = await axios.post('/login', login)
                   <path fill="none" d="M0 0h24v24H0z"></path>
                   <path d="M18 8h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2V7a6 6 0 1 1 12 0v1zM5 10v10h14V10H5zm6 4h2v2h-2v-2zm-4 0h2v2H7v-2zm8 0h2v2h-2v-2zm1-6V7a4 4 0 1 0-8 0v1h8z"></path>
                 </g>
-              </svg>
+              </svg><div className='text-danger'>{loginMsg}</div>
             </div>
+             
             <button onClick={siginFunc} className="px-12 py-3 bg-primary rounded-full text-lg text-white uppercase absolute left-1/2 -translate-x-1/2 hover:bg-[#4161cc] transition duration-300">
               Sign In
             </button>
-          </form>
+          
           <p className="text-xl flex gap-2 mt-32 justify-center">
             <span>Not a member?</span>
             <button type="submit" onClick={LoginForms} className="text-primary/90 underline">
               Sign Up
             </button>
-          </p>
+          </p></form>
         </div>
       </div>
         

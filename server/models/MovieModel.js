@@ -15,7 +15,7 @@ const MovieSchema = new Schema({
     bigimg:String,
     smallimg:String,
     isDeleted:{type:Boolean, default:false}
-}, {
+},{timestamps:true,
     versionKey: false
 })
 
