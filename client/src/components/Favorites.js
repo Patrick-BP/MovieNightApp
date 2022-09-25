@@ -1,5 +1,7 @@
 import Movie from './Movie'
 function Favorites() {
+
+    
     return ( 
         <>
         <div className='mr-3 mb-4'>
