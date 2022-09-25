@@ -15,6 +15,10 @@ exports.delById = async (req, res) => {
 };
 
 exports.save = async (req, res) => {
-   const result = await new Fav(req.body).save()
+    const find = await Fav.findOne({userId:req.body.userId, movieId:req.body.movieId})
+    if(!find){
+        const result = await new Fav(req.body).save()
     res.json(result)
+    }
+   
 };
