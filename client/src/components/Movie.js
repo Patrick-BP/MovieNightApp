@@ -30,11 +30,14 @@ filtered = filteredFinder.reverse()
 
 }
 const [iconChange, SetIconChange] = useState("white")
-const [userInfo, SetuserInfo] = useState({
+const [userInfo, SetuserInfo] = useState({})
 
-})
 function favFun(id){
-axios.post(`/fav/`)
+  const movieid =id
+  const userid = user.data.others._id
+  const newFav ={userId:userid, movieId:movieid}
+
+axios.post('/fav/add', newFav)
   
 }
 
