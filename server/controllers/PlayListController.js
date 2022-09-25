@@ -15,7 +15,10 @@ exports.delById = async (req, res) => {
 };
 
 exports.save = async (req, res) => {
+    const find = await Playlist.findOne({userId:req.body.userId, movieId:req.body.movieId})
+    if(!find){
     const result = await new Playlist(req.body).save()
      res.json(result)
+    }
  };
  
