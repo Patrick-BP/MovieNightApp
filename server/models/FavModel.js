@@ -4,7 +4,7 @@ const {Schema} = mongoose
 
 const FavoriteMoviesSchema = new Schema({
     userId:String,
-    movieId:{type: Schema.Types.ObjectId, ref: 'movies'}
+    movieId:{type: mongoose.Schema.Types.ObjectId, ref: "Movies"}
 },{timestamps:true,
     versionKey: false
 })
