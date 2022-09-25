@@ -5,7 +5,7 @@ const {ObjectId} = require('mongodb')
 
 exports.getAll = async (req, res)=>{
     try{
-       const result = await Favmovie.find({userId:req.params.userId}).populate('Movies');
+       const result = await Favmovie.find({userId:req.params.userId}).populate('movies');
     res.json(result) 
     }catch(e){
         res.json(e)
