@@ -8,4 +8,5 @@ route.get('/:movieId', MovieController.getById);
 route.delete('/:movieId', MovieController.delById);
 route.put('/:movieId', MovieController.updateById);
 
+
 module.exports = route

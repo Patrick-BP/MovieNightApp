@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import {useNavigate} from 'react-router-dom'
 import axios from 'axios'
+import { useContext } from "react";
+import {Context} from './context'
 axios.defaults.baseURL = 'http://localhost:3001'
+
 function SignIn({LoginForms}) {
+
+const {user, dispatch, isFetching} = useContext(Context)
+
 const [login, setLogin]= useState({email:"", password:""})
 const [loginMsg, setLogimsg] =useState("")
 
@@ -11,16 +17,20 @@ const navigate = useNavigate()
    
     setLogin({...login, [e.target.name]:e.target.value})
   }
+
+
   async function siginFunc(e){ 
     e.preventDefault()
+    dispatch({type:"LOGIN_START"});
+
     try{
 const response = await axios.post('/login', login)
-  console.log(response.data.data.others); 
-    setLogimsg("successfully loged in")
     localStorage.setItem('accessToken', response.data.data.accessToken);
-      navigate('home')
+    dispatch({type:"LOGIN_SUCCESS", payload: response.data});
+
+      // navigate('home')
     }catch(e){
-      setLogimsg(e.response.data.message) ;
+      dispatch({type:"LOGIN_FAILURE"});
     }
     
     
@@ -114,7 +124,7 @@ const response = await axios.post('/login', login)
               </svg><div className='text-danger'>{loginMsg}</div>
             </div>
              
-            <button onClick={siginFunc} className="px-12 py-3 bg-primary rounded-full text-lg text-white uppercase absolute left-1/2 -translate-x-1/2 hover:bg-[#4161cc] transition duration-300">
+            <button onClick={siginFunc} className="btn-signIn px-12 py-3 bg-primary rounded-full text-lg text-white uppercase absolute left-1/2 -translate-x-1/2 hover:bg-[#4161cc] transition duration-300" disabled={isFetching}>
               Sign In
             </button>
           

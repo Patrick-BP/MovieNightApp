@@ -4,7 +4,7 @@ const {ObjectId} = require('mongodb')
 
 
 exports.getAll = async (req, res)=>{
-    const result = await Movie.find();
+    const result = await Movie.find({isDeleted:false});
     res.json(result)
 };
 
@@ -26,3 +26,4 @@ exports.delById = async (req, res) => {
     await Movie.findByIdAndDelete(req.params.movieId)
     res.json({_id:req.params.movieId})
 };
+

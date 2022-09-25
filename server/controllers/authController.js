@@ -11,7 +11,7 @@ exports.login = async (req, res, next) => {
     let result;
     let validated;
 
-    result = await User.findOne({ email: req.body.email });
+    result = await User.findOne({ email: req.body.email , isDeleted:false});
 
     if (result) {
       validated = await bcrypt.compare(req.body.password, result.password);

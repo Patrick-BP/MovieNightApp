@@ -5,6 +5,10 @@ const mongoose = require("mongoose");
 const userRouter = require("./routers/UserRouter");
 const CommentsRouter = require("./routers/MoviesRouter");
 const MoviesRouter = require("./routers/MoviesRouter");
+
+const FavRouter = require("./routers/FavRouter");
+const PlaylistRouter = require("./routers/PlaylistRouter");
+
 const Response = require('./models/responseobj');
 const authRouter = require('./routers/authRouter');
 
@@ -25,6 +29,8 @@ app.use(authRouter);
 app.use("/users", userRouter);
 app.use("/movies", MoviesRouter);
 app.use("/comments", CommentsRouter);
+app.use("/fav", FavRouter);
+app.use("/playlist", PlaylistRouter);
 
 app.use((req, res, next) => {
   res.status(404).json(new Response(true, err.message, null));
