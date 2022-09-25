@@ -14,3 +14,8 @@ exports.delById = async (req, res) => {
     res.json({_id:req.params.movieId})
 };
 
+exports.save = async (req, res) => {
+    const result = await new Playlist(req.body).save()
+     res.json(result)
+ };
+ 
