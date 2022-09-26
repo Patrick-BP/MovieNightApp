@@ -4,6 +4,8 @@ import { useContext, useState } from "react";
 import axios from "axios";
 axios.defaults.baseURL ="http://localhost:3001"
 function AddMovie() {
+  const [imgSuccess, setImgSuccess] = useState()
+  const [movieSuccess, setMovieSuccess] = useState()
   const [movie, setMovie] = useState({
     title: "",
     overview: "",
@@ -44,7 +46,9 @@ function AddMovie() {
         newMovie.smallimg = filename;
 
 try{
-    await axios.post("/img/upload", data);
+   const resp = await axios.post("/img/upload", data);
+   setImgSuccess(resp.data)
+    console.log(resp)
 }catch(e){
     console.log(e);
 }
@@ -54,6 +58,7 @@ try{
 
     try{
        const response = await axios.post("/movies", newMovie);
+       setMovieSuccess(response.data)
     }catch(e){}
 
   }
@@ -245,10 +250,9 @@ try{
             </div>
             <input
               className="form-control"
-              placeholder="Thumbnail"
               type="file"
               onChange={(e)=>setfile(e.target.files[0])}
-            />
+            multiple/>
           </div>
           <div className="form-group input-group">
             <div className="input-group-prepend">
@@ -272,9 +276,12 @@ try{
               Save{" "}
             </button>
           </div>
-          <p className="text-center text-success">
-            Successfully added!!
-          </p>
+          {imgSuccess && <p className="text-center text-success">
+            {imgSuccess}
+          </p>}
+          {movieSuccess && <p className="text-center text-success">
+            {movieSuccess}
+          </p>}
         </form>
       </article>
     </div>
