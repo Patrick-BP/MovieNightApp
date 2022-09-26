@@ -3,11 +3,10 @@ import "../App.css";
 import Movie from "../components/Movie";
 import { useContext } from "react";
 import AddMovie from "../components/admin/AddMovie";
+import { Outlet } from "react-router-dom";
+import NavAdmin from "../components/admin/NavAdmin";
 
 function HomeAdmin() {
-
-
-
   return (
     <div className="">
       <div className="wrapper d-flex">
@@ -17,7 +16,7 @@ function HomeAdmin() {
           </div>
 
           <div>
-            <Nav />
+            <NavAdmin />
           </div>
         </div>
         {/* midle-side */}
@@ -25,16 +24,12 @@ function HomeAdmin() {
           <div className=" heading">
             <h4>Movie Night</h4>
           </div>
-         
-    <AddMovie/>
-         
+
+          <Outlet />
           
         </div>
         {/* end midle-side */}
-
       </div>
-
-      
     </div>
   );
 }

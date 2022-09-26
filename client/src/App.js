@@ -7,14 +7,22 @@ import LoginPage from "./pages/LoginPage";
 import HomeAdmin from './pages/HomeAdmin'
 import { useContext } from "react";
 import { Context } from "./components/context";
+import AddMovie from "./components/admin/AddMovie";
+import ShowmovieTable from "./components/admin/ShowmovieTable"
 function App() {
   const { user} = useContext(Context)
 
   return (
     <BrowserRouter>
     <Routes>
-      <Route extact path="/" element={user? <HomeAdmin /> : <LoginPage />}></Route>
-     <Route path="home" element={user? <HomeAdmin /> : <LoginPage />}></Route> 
+    
+      <Route extact path="/" element={user? <HomeAdmin></HomeAdmin> : <LoginPage />}>
+      <Route path="show" element={< ShowmovieTable />}></Route>
+        <Route path="add" element={<AddMovie />}></Route>
+
+      </Route>
+    
+
       {/* <Route path="movie/:movieId" element={user?<MovieDetailsPage /> :  <LoginPage />}></Route> */}
 
       <Route
@@ -22,6 +30,9 @@ function App() {
         path="*"
         element={
           <>
+
+
+          
             <div className="container fs-1 text-center">PAGE NOT FOUND </div>
             <Link to="/users">
               <p className="container fs-5 text-center">Home</p>
@@ -35,3 +46,5 @@ function App() {
 }
 
 export default App;
+
+

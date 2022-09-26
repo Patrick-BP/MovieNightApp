@@ -561,3 +561,6 @@ a:hover{
 .card-addmovie{
   height: 100vh !important;
 }
+.cursor-del:hover{
+  cursor: pointer;
+}

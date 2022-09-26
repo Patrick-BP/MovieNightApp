@@ -2,85 +2,97 @@ import "../../App.css";
 
 import { useContext, useState } from "react";
 import axios from "axios";
-axios.defaults.baseURL ="http://localhost:3001"
+axios.defaults.baseURL = "http://localhost:3001";
 function AddMovie() {
-  const [imgSuccess, setImgSuccess] = useState()
-  const [movieSuccess, setMovieSuccess] = useState()
+  const [imgSuccess, setImgSuccess] = useState();
+  const [movieSuccess, setMovieSuccess] = useState();
+  const [addSuccess,setAddSuccess] = useState()
   const [movie, setMovie] = useState({
     title: "",
     overview: "",
     popularity: 0,
-    releaseDate:"",
+    releaseDate: "",
     genre: "",
     language: "",
     director: "",
     type: "",
     country: "",
-    
-  
   });
-  const [file, setfile] =useState(null)
-  const [videofile, setvideofile] =useState(null)
+  const [file, setfile] = useState(null);
+  const [videofile, setvideofile] = useState(null);
 
   function handleChanges(e) {
     setMovie({ ...movie, [e.target.name]: e.target.value });
   }
-  
+
   async function submit(e) {
-    e.preventDefault()
-    const newMovie ={
-        title:movie.title,
-        overview:movie.overview,
-        popularity:movie.popularity,
-        releaseDate:movie.releaseDate,
-        genre:movie.genre,
-        language:movie.language,
-        director:movie.director,
-        type:movie.type,
-        country:movie.country,
+    e.preventDefault();
+    const newMovie = {
+      title: movie.title,
+      overview: movie.overview,
+      popularity: movie.popularity,
+      releaseDate: movie.releaseDate,
+      genre: movie.genre,
+      language: movie.language,
+      director: movie.director,
+      type: movie.type,
+      country: movie.country,
+    };
+    if (file) {
+      const data = new FormData();
+      const filename = Date.now() + file.name;
+      data.append("name", filename);
+      data.append("file", file);
+      newMovie.smallimg = filename;
+
+      try {
+        const resp = await axios.post("/upload/", data);
+        setImgSuccess(resp);
+      } catch (e) {
+        console.log(e.message);
+      }
     }
-    if(file){
-        const data = new FormData();
-        const filename = Date.now() + file.name;
-        data.append("name",filename);
-        data.append("file", file);
-        newMovie.smallimg = filename;
 
-try{
-   const resp = await axios.post("/upload/", data);
-
-}catch(e){
-    console.log(e.message);
-}
-    }
-    
-
-    if(videofile){
+    if (videofile) {
       const datavid = new FormData();
       const filename = Date.now() + videofile.name;
-      datavid.append("name",filename);
-      datavid.append("file",videofile);
+      datavid.append("name", filename);
+      datavid.append("file", videofile);
       newMovie.videourl = filename;
 
-try{
- const resp = await axios.post("/upload/vid/", datavid);
-}catch(e){
-  console.log(e.message);
-}
-  }
-  
-
-    try{
-       const resp = await axios.post("/movies", newMovie);
-   
-    }catch(e){
-      console.log(e.message);
+      try {
+        const resp = await axios.post("/upload/vid/", datavid);
+        setMovieSuccess(resp.data);
+      } catch (e) {
+        console.log(e.message);
+      }
     }
 
-    
-
+    try {
+      const resp = await axios.post("/movies", newMovie);
+      setAddSuccess(resp.data)
+    } catch (e) {
+      console.log(e.message);
+    }
+    e.target.reset()
+    setTimeout(() => {
+      setImgSuccess();
+      setMovieSuccess();
+      setvideofile(null);
+      setfile(null);
+      setMovie({
+        title: "",
+        overview: "",
+        popularity: 0,
+        releaseDate: "",
+        genre: "",
+        language: "",
+        director: "",
+        type: "",
+        country: "",
+      })
+    }, 2000);
   }
-
 
   return (
     <div className="card card-addmovie">
@@ -171,9 +183,14 @@ try{
                 <i className="fa fa-film"></i>{" "}
               </span>
             </div>
-            
 
-            <select className="custom-select" name="genre" onChange={handleChanges} value={movie.genre} required>
+            <select
+              className="custom-select"
+              name="genre"
+              onChange={handleChanges}
+              value={movie.genre}
+              required
+            >
               <option value="">Movie Genre</option>
               <option value="Action">Action</option>
               <option value="Horror">Horror</option>
@@ -182,11 +199,7 @@ try{
               <option value="Science Fiction">Science Fiction</option>
               <option value="Familly">Familly</option>
               <option value="Crime">Crime</option>
-              
-              
             </select>
-          
-
           </div>
           <div className="form-group input-group">
             <div className="input-group-prepend">
@@ -195,14 +208,18 @@ try{
                 <i className="fa fa-microphone"></i>{" "}
               </span>
             </div>
-            <select className="custom-select" name="language" onChange={handleChanges} value={movie.language} required>
+            <select
+              className="custom-select"
+              name="language"
+              onChange={handleChanges}
+              value={movie.language}
+              required
+            >
               <option value="">Movie language</option>
               <option value="English">English</option>
               <option value="French">French</option>
-              
             </select>
           </div>
-          
 
           <div className="form-group input-group">
             <div className="input-group-prepend">
@@ -221,7 +238,6 @@ try{
               required
             />
           </div>
-          
 
           <div className="form-group input-group">
             <div className="input-group-prepend">
@@ -230,15 +246,20 @@ try{
                 <i className="fa fa-film"></i>{" "}
               </span>
             </div>
-            <select className="custom-select" value={movie.type} name="type" onChange={handleChanges} required>
+            <select
+              className="custom-select"
+              value={movie.type}
+              name="type"
+              onChange={handleChanges}
+              required
+            >
               <option value="">Movie Type</option>
               <option value="Movie">Movie</option>
               <option value="Tv-Show">Tv-Show</option>
               <option value="Documentary">Documentary</option>
-              
             </select>
           </div>
-          
+
           <div className="form-group input-group">
             <div className="input-group-prepend">
               <span className="input-group-text">
@@ -246,19 +267,22 @@ try{
                 <i className="fa fa-globe"></i>{" "}
               </span>
             </div>
-            <select className="custom-select" value={movie.country} name="country" onChange={handleChanges} required>
+            <select
+              className="custom-select"
+              value={movie.country}
+              name="country"
+              onChange={handleChanges}
+              required
+            >
               <option value="">Country</option>
               <option value="USA">USA</option>
               <option value="UK">UK</option>
               <option value="CHINA">CHINA</option>
               <option value="KOREA">KOREA</option>
               <option value="FRANCE">FRANCE</option>
-              
             </select>
           </div>
-          
 
-         
           <div className="form-group input-group">
             <div className="input-group-prepend">
               <span className="input-group-text">
@@ -269,7 +293,7 @@ try{
             <input
               className="form-control"
               type="file"
-              onChange={(e)=>setfile(e.target.files[0])}
+              onChange={(e) => setfile(e.target.files[0])}
             />
           </div>
           <div className="form-group input-group">
@@ -283,23 +307,25 @@ try{
               className="form-control"
               placeholder="movie"
               type="file"
-             
-        multiple
-              onChange={(e)=>setvideofile(e.target.files[0])}
+              multiple
+              onChange={(e) => setvideofile(e.target.files[0])}
             />
           </div>
           <div className="form-group">
-            <button type="submit"  className="btn btn-primary btn-block">
+            <button type="submit" className="btn btn-primary btn-block">
               {" "}
               Save{" "}
             </button>
           </div>
-          {/* {imgSuccess && <p className="text-center text-success">
-            {imgSuccess}
-          </p>}
-          {movieSuccess && <p className="text-center text-success">
-            {movieSuccess} 
-          </p>}*/}
+          {addSuccess && (
+            <p className="text-center text-success">{addSuccess}</p>
+          )}
+          {imgSuccess && (
+            <p className="text-center text-success">{imgSuccess}</p>
+          )}
+          {movieSuccess && (
+            <p className="text-center text-success">{movieSuccess}</p>
+          )}
         </form>
       </article>
     </div>

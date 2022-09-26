@@ -11,7 +11,7 @@ exports.getAll = async (req, res)=>{
 exports.save = async (req, res)=>{
     
    const result =  await new Movie(req.body).save()
-    res.json(result)
+    res.json("movie adding successfully!!")
 };
 
 exports.getById = async(req, res)=>{
