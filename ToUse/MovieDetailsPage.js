@@ -5,6 +5,7 @@ import Favorites from "../components/Favorites";
 import MyPlayList from "../components/MyPlayList";
 import SearchResult from "../components/SearchResult";
 import MoviePlay from "../components/MoviePlay";
+import {ErrorBoundary} from 'react-error-boundary'
 function MovieDetailsPage() {
   return (
     <div className="">
@@ -24,13 +25,15 @@ function MovieDetailsPage() {
           <div className=" heading">
             <h4>Movie Night</h4>
           </div>
-
-          <MoviePlay />
-
+ <ErrorBoundary >
+           <MoviePlay /> 
+</ErrorBoundary>
           <div className="favorites-wrppr">
             <div className=" heading">Favorites Movies</div>
             <div className="d-flex flex-wrap justify-content-start p-1 m-5">
+            <ErrorBoundary>
               <Favorites />
+              </ErrorBoundary>
             </div>
           </div>
 

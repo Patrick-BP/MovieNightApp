@@ -2,9 +2,9 @@
 import "./App.css";
 import Movie from "./components/Movie";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import MovieDetailsPage from "./pages/MovieDetailsPage";
+// import MovieDetailsPage from "./pages/MovieDetailsPage";
 import LoginPage from "./pages/LoginPage";
-import Home from './pages/Home'
+import HomeAdmin from './pages/HomeAdmin'
 import { useContext } from "react";
 import { Context } from "./components/context";
 function App() {
@@ -13,9 +13,9 @@ function App() {
   return (
     <BrowserRouter>
     <Routes>
-      <Route extact path="/" element={user? <Home /> : <LoginPage />}></Route>
-     <Route path="home" element={user? <Home /> : <LoginPage />}></Route> 
-      <Route path="movie/:movieId" element={user?<MovieDetailsPage /> :  <LoginPage />}></Route>
+      <Route extact path="/" element={user? <HomeAdmin /> : <LoginPage />}></Route>
+     <Route path="home" element={user? <HomeAdmin /> : <LoginPage />}></Route> 
+      {/* <Route path="movie/:movieId" element={user?<MovieDetailsPage /> :  <LoginPage />}></Route> */}
 
       <Route
         

@@ -1,6 +1,7 @@
 import Movie from "./Movie";
 import axios from "axios";
 import { useEffect, useState, useContext } from "react";
+import FavAndPlayListMovie from './FavAndPlayListMovie'
 import {Context} from './context'
 axios.defaults.baseURL = 'http://localhost:3001'
 function Favorites() {
@@ -9,30 +10,22 @@ function Favorites() {
   const [userid, setuserid] = useState(user.data.others)
   useEffect(() => {
     (async function fetch() {
-    // const listFav = await axios.get(`fav/${userid._id}`);
-    // console.log(listFav);
-    // setfavList(listFav);
+    const listFav = await axios.get(`fav/${userid._id}`);
+    console.log(listFav.data);
+    setfavList(listFav);
     })();
   }, []);
-  console.log(favlist);
-  console.log(user.data.others._id);
+
   return (
     <>
-      <div className="mr-3 mb-4">
-        <Movie />
+    {favlist.data?.map((fav, index)=>{
+        return (
+            <div key={index} className="mr-3 mb-4">
+         <FavAndPlayListMovie list ={fav} />
       </div>
-      <div className="mr-3">
-        <Movie />
-      </div>
-      <div className="mr-3">
-        <Movie />
-      </div>
-      <div className="mr-3">
-        <Movie />
-      </div>
-      <div className="mr-3">
-        <Movie />
-      </div>
+        )
+    })}  
+      
       <div className="mr-3">
         <Movie />
       </div>
