@@ -12,7 +12,7 @@ const MovieSchema = new Schema({
     director:String,
     type:String,
     country:String,
-    bigimg:{type:String, default:"sample-big-img.png"},
+    smallimg:{type:String, default:"sample-big-img.png"},
     videourl:String,
     isDeleted:{type:Boolean, default:false}
 },{timestamps:true,
