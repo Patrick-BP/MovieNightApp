@@ -42,7 +42,7 @@ function AddMovie() {
         data.name =filename;
         data.file = file;
         newMovie.smallimg = filename;
-console.log("this data:", newMovie);
+
 try{
     await axios.post("/img/upload", data);
 }catch(e){

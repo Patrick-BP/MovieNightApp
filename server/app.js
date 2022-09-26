@@ -15,7 +15,7 @@ const authRouter = require('./routers/authRouter');
 
 const app = express();
 
-app.use("/images", express.static(path.join(__dirname, "/images")));
+app.use("/images", express.static(path.join(__dirname, "images")));
 app.use(cors());
 app.use(express.json());
 
@@ -30,9 +30,14 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-app.post("/img/upload", upload.single("file"), (req, res) => {
+try{
+  app.post("/img/upload", upload.single("file"), (req, res) => {
   res.status(200).json("File has been uploaded");
 });
+}catch(e){
+  res.status(400).json("File failed");
+}
+
 
 
 
