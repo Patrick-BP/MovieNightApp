@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const multer = require('multer')
 
 const userRouter = require("./routers/UserRouter");
 const CommentsRouter = require("./routers/MoviesRouter");
@@ -24,6 +25,20 @@ app.use(
     abortOnLimit: true,
   })
 );
+
+const storage = multer.diskStorage({
+  destination:(req, file, cb)=>{
+    cb(null, "images");
+  },
+  filename:(req, file, cb)=>{
+    cb(null, req.body.name);
+  },
+});
+
+const upload =multer({storage:storage});
+app.post('/img/upload', upload.single("file"),(req, res)=>{
+  res.status(200).json("File has been uploaded")
+})
 
 app.use(authRouter);
 app.use("/users", userRouter);
