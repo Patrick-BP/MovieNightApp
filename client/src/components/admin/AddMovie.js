@@ -20,6 +20,7 @@ function AddMovie() {
   
   });
   const [file, setfile] =useState(null)
+  const [videofile, setvideofile] =useState(null)
 
   function handleChanges(e) {
     setMovie({ ...movie, [e.target.name]: e.target.value });
@@ -41,25 +42,42 @@ function AddMovie() {
     if(file){
         const data = new FormData();
         const filename = Date.now() + file.name;
-        data.name =filename;
-        data.file = file;
+        data.append("name",filename);
+        data.append("file", file);
         newMovie.smallimg = filename;
 
 try{
-   const resp = await axios.post("/img/upload", data);
-   setImgSuccess(resp.data)
-    console.log(resp)
+   const resp = await axios.post("/upload/", data);
+
 }catch(e){
-    console.log(e);
+    console.log(e.message);
 }
     }
     
 
+    if(videofile){
+      const datavid = new FormData();
+      const filename = Date.now() + videofile.name;
+      datavid.append("name",filename);
+      datavid.append("file",videofile);
+      newMovie.videourl = filename;
+
+try{
+ const resp = await axios.post("/upload/vid/", datavid);
+}catch(e){
+  console.log(e.message);
+}
+  }
+  
 
     try{
-       const response = await axios.post("/movies", newMovie);
-       setMovieSuccess(response.data)
-    }catch(e){}
+       const resp = await axios.post("/movies", newMovie);
+   
+    }catch(e){
+      console.log(e.message);
+    }
+
+    
 
   }
 
@@ -69,7 +87,7 @@ try{
       <article className="card-body mx-auto" style={{ maxWidth: "400px" }}>
         <h4 className="card-title mt-3 text-center">Add New Movie</h4>
 
-        <form  encType="multipart/form-data">
+        <form onSubmit={submit} encType="multipart/form-data">
           <div className="form-group input-group">
             <div className="input-group-prepend">
               <span className="input-group-text">
@@ -252,7 +270,7 @@ try{
               className="form-control"
               type="file"
               onChange={(e)=>setfile(e.target.files[0])}
-            multiple/>
+            />
           </div>
           <div className="form-group input-group">
             <div className="input-group-prepend">
@@ -265,23 +283,23 @@ try{
               className="form-control"
               placeholder="movie"
               type="file"
-              name="videourl"
-              value={movie.videourl} 
-              onChange={handleChanges}
+             
+        multiple
+              onChange={(e)=>setvideofile(e.target.files[0])}
             />
           </div>
           <div className="form-group">
-            <button type="submit" onClick={submit} className="btn btn-primary btn-block">
+            <button type="submit"  className="btn btn-primary btn-block">
               {" "}
               Save{" "}
             </button>
           </div>
-          {imgSuccess && <p className="text-center text-success">
+          {/* {imgSuccess && <p className="text-center text-success">
             {imgSuccess}
           </p>}
           {movieSuccess && <p className="text-center text-success">
-            {movieSuccess}
-          </p>}
+            {movieSuccess} 
+          </p>}*/}
         </form>
       </article>
     </div>

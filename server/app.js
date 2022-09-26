@@ -20,25 +20,25 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/images", express.static(path.join(__dirname,"/images")));
+app.use("/videos", express.static(path.join(__dirname,"/videos"))); 
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "/images");
+    cb(null, "images");
   },
   filename: (req, file, cb) => {
     cb(null, req.body.name);
   },
 });
 
-const upload = multer({ storage: storage });
-try{
-  app.post("/img/upload", upload.single("file"), (req, res) => {
-  res.status(200).json("File has been uploaded");
+const storagevid = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "videos");
+  },
+  filename: (req, file, cb) => {
+    cb(null, req.body.name);
+  },
 });
-}catch(e){
-  res.status(400).json("File failed");
-}
-
 
 
 
@@ -48,6 +48,25 @@ app.use("/movies", MoviesRouter);
 app.use("/comments", CommentsRouter);
 app.use("/fav", FavRouter);
 app.use("/playlist", PlaylistRouter);
+
+const upload = multer({ storage: storage });
+try{
+  app.post("/upload", upload.single("file"), (req, res) => {
+  res.status(200).json("photo has been uploaded");
+});
+}catch(e){
+  res.status(400).json("photo failed");
+}
+
+const uploadvid = multer({ storage: storagevid });
+try{
+  app.post("/upload/vid", uploadvid.single("file"), (req, res) => {
+  res.status(200).json("video has been uploaded");
+});
+}catch(e){
+  res.status(400).json("video failed");
+}
+
 
 app.use((req, res, next) => {
   res.status(404).json(new Response(true, err.message, null));
