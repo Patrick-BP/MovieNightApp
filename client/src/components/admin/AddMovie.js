@@ -41,7 +41,7 @@ function AddMovie() {
         const filename = Date.now() + file.name;
         data.name =filename;
         data.file = file;
-        newMovie.videourl = filename;
+        newMovie.smallimg = filename;
 console.log("this data:", newMovie);
 try{
     await axios.post("/img/upload", data);
