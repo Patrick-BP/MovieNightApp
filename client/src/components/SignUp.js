@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 axios.defaults.baseURL= 'http://localhost:3001'
 function SignUp({LoginForms}) {
+  const navigate = useNavigate
   const [userInfo, setuserinfo] = useState({firstname:"" , lastname:"" , email:"" , password:""})
-let message="";
+let [message, setmessage]= useState("");
 
   function handlechange(e){
     const {value, name} = e.target
@@ -11,11 +13,17 @@ let message="";
   }
   async function signUpFun(e){
     e.preventDefault()
+
     if(userInfo.firstname !=="" && userInfo.lastname!=="" && userInfo.email!=="" && userInfo.password!==""){
  await axios.post('/users', userInfo)
    .then((res)=>console.log(res))
    
-   message="successfully Registrated!"
+   setmessage("successfully Registrated!")
+   setTimeout(()=>{
+setuserinfo({firstname:"" , lastname:"" , email:"" , password:""})
+setmessage()
+navigate('/login')
+   },2000)
     }else{
       message="Fields Can't be Empty"
     }
@@ -40,7 +48,7 @@ let message="";
           
           
         </div>
-        <form action="#">
+        <form onSubmit={signUpFun}>
           <div className="flex md:justify-between gap-8 md:gap-0 mb-6">
             <div className="relative mr-5">
               <input
@@ -194,11 +202,11 @@ let message="";
                 <path d="M18 8h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2V7a6 6 0 1 1 12 0v1zM5 10v10h14V10H5zm6 4h2v2h-2v-2zm-4 0h2v2H7v-2zm8 0h2v2h-2v-2zm1-6V7a4 4 0 1 0-8 0v1h8z"></path>
               </g>
             </svg>
-            <p className="absolute top-[95%] left-[3%] text-red-600">{message}</p>
+           {message &&<p style={{display: "block"}} className="absolute top-[95%] left-[3%] text-red-600">{message}</p>} 
           </div>
           <button
             type="submit"
-            onClick={signUpFun}
+            
             className="px-12 py-3 bg-primary rounded-full text-lg text-white uppercase absolute left-1/2 -translate-x-1/2 hover:bg-[#4161cc] transition duration-300"
           >
             Register

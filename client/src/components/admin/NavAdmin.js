@@ -8,7 +8,8 @@ const navigate = useNavigate()
   function logoutFunc(){
     dispatch({type:"LOGOUT"})
     localStorage.removeItem('accessToken')
-    // navigate('/')
+    localStorage.removeItem('user')
+    navigate('/login')
   }
     return ( 
         <>

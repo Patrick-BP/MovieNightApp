@@ -13,7 +13,7 @@ const MovieSchema = new Schema({
     type:String,
     country:String,
     smallimg:{type:String, default:"sample-big-img.png"},
-    videourl:String,
+    videourl:{type:String, default:"coming-soon.jpg"},
     isDeleted:{type:Boolean, default:false}
 },{timestamps:true,
     versionKey: false

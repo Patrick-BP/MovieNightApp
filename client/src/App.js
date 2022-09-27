@@ -17,16 +17,23 @@ function App() {
   return (
     <BrowserRouter>
     <Routes>
-    
-      <Route extact path="/" element={user? <Home/> : <LoginPage />}>
-      <Route path="show" element={< ShowmovieTable />}></Route>
-        <Route path="add" element={<AddMovie />}></Route>
+    <Route  path="/" element={user == null ? <LoginPage /> :
+    user && user.data.others.role === "user"? <Home/> : <HomeAdmin />}>
+        <Route path="login" element={user == null && <LoginPage />}></Route>
 
       </Route>
+      <Route  path="home" element={user  && user.data.others.role == "user"? <Home/> : <LoginPage />}>
+      </Route>
+
+      <Route  path="/" element={user &&  user.data.others.role === "admin"? <HomeAdmin/> : <LoginPage />}>
+      <Route path="show" element={< ShowmovieTable />}></Route>
+      <Route path="add" element={<AddMovie />}></Route>
+      </Route>
+
+
     <Route path="movie/:id" element={<MovieDetailsPage/>}></Route>
-
-      {/* <Route path="movie/:movieId" element={user?<MovieDetailsPage /> :  <LoginPage />}></Route> */}
-
+    
+    
       <Route
         
         path="*"

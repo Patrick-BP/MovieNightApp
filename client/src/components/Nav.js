@@ -4,11 +4,12 @@ import {Context} from './context'
 function Nav() {
 
   const {user, dispatch} = useContext(Context)
-
+  const navigate = useNavigate()
   function logoutFunc(){
     dispatch({type:"LOGOUT"})
     localStorage.removeItem('accessToken')
-    
+    localStorage.removeItem('user')
+    navigate('/login')
   }
     return ( 
         <>

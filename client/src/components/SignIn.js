@@ -28,7 +28,8 @@ const response = await axios.post('/login', login)
     localStorage.setItem('accessToken', response.data.data.accessToken);
     dispatch({type:"LOGIN_SUCCESS", payload: response.data});
 
-      // navigate('home')
+ 
+      
     }catch(e){
       dispatch({type:"LOGIN_FAILURE"});
     }
