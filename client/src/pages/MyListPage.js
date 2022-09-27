@@ -1,13 +1,35 @@
-import Nav from "../components/Nav";
-import "../App.css";
-import Movie from "../components/Movie";
-import { useContext } from "react";
-import { Context } from "../components/context";
+import { Link } from "react-router-dom";
+import React, { useState,useEffect, useContext } from 'react';
+import axios from "axios";
+import Nav from '../components/Nav'
+import {Context} from '../components/context'
 
-function Home() {
-  const {user} = useContext(Context)
+axios.defaults.baseURL = "http://localhost:3001";
+
+function MyListPage() {
+const urlPath = 'http://localhost:3001'
+const {user} = useContext(Context)
+
+const [myMovies, setMyMovies] = useState([]);
+  const [iconChange, setIconChange] = useState('white')
+useEffect(()=>{
+  (async function fetch(){
+    const list = await axios.get(`/fav/${user.data.others._id}`)
+    setMyMovies(list.data)
+  })()
+
+},[myMovies])
+
+function remfavFunc(id){
+axios.delete(`/fav/${user.data.others._id}/${id}`)
+
+}
+
+
   return (
-    <div className="">
+    <>
+
+<div className="">
       <div className="wrapper d-flex">
         <div className="left-side ">
           <div className="logo-div">
@@ -23,63 +45,51 @@ function Home() {
           <div className=" heading">
             <h4>Movie Night</h4>
           </div>
-          <div className="home__boxx">
-            <div className="discovers">
-              <div className="discover__img">
-                <img src="/startwars.jpeg" />
-              </div>
-              <div className="discover__content">
-                <div className="discover__left">
-                  <h3>
-                    Start Wars<span>( 2022 )</span>
-                  </h3>
-                  <div className="button__box">
-                    <a href="/movie/960700">
-                      <button className="btn1">Play</button>
-                    </a>
-                    <button className="btn2">My List</button>
-                  </div>
-                  <p>
-                    In this sequel to the 2017 live-action netflix Adaptation of
-                    the manga the Elric brothers meet their toughest opponent
-                    ...
-                  </p>
-                </div>
-                <div className="right__discover">
-                  <svg
-                    className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv"
-                    focusable="false"
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    data-testid="StarIcon"
-                  >
-                    <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                  </svg>
-                  <span>7</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          
 
-          <div className=" heading">Latest Movies</div>
-          <div className="d-flex flex-wrap result-wrpr">
-            <Movie filter="releaseDate" />
+<div className="d-flex flex-wrap">
+
+{myMovies.length === 0 ? <div className="text-center"><h1>No Favorite Movie Yet</h1></div> : myMovies.map((movie,index)=>{
+      return (
+        <div key={index}  className="m-2 movie-box image-container">
+         <img src={`${urlPath}/images/${movie.movieId.smallimg}`} alt="movie" />  
+          <div className="fav" onClick={()=>remfavFunc(movie.movieId._id)}>
+            <svg style={{color:iconChange}}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv"
+              focusable="false"
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              data-testid="FavoriteBorderIcon"
+            >
+              <path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"></path>
+            </svg>
           </div>
-          <br />
-          <br />
-          <div>
-            <div className=" heading">Top Rated</div>
-            <div className="d-flex result-wrpr">
-              <Movie filter={"popularity"} />
+          <Link  to={`/movie/${movie.movieId._id}`}>
+          <div className="overlay ">
+            <div className="movie-title">{movie.movieId.title}</div>
+            <div className="d-flex flex-row  justify-content-between">
+              <div className="text-size">{new Date(movie.movieId.releaseDate).getFullYear()}</div>
+              <div className=" text-size  text-warning">
+              {movie.movieId.popularity} &nbsp;<i className="fa-sharp fa-solid fa-star"></i>
+              </div>
             </div>
           </div>
+          </Link>
         </div>
+      )
+    }) }
+</div>
+
+          
+            
+          </div>
+        
         {/* end midle-side */}
 
         {/* right-side */}
         <div className="right-side ">
          <div className="profile-name">
-          <span><i class="fa-sharp fa-solid fa-circle-user mr-3  fs-1"></i>{user.data.others.firstname}</span>
+          <span><i className="fa-sharp fa-solid fa-circle-user mr-3  fs-1"></i>{user.data.others.firstname}</span>
          </div>
           <div className="tag__box">
             <div className="tag btn btn-outline-secondary">
@@ -175,10 +185,10 @@ function Home() {
         </div>
         {/*end right-side */}
       </div>
+</div>
 
-    
-    </div>
+    </>
   );
 }
 
-export default Home;
+export default MyListPage;

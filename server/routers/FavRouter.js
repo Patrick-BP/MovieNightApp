@@ -4,7 +4,7 @@ const route = express.Router();
 
 route.get('/:userId', FavController.getAll);
 route.post('/add', FavController.save);
-route.delete('/:favId', FavController.delById);
+route.delete('/:userId/:movieId', FavController.delById);
 
 
 module.exports = route 

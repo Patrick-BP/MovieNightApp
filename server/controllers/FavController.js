@@ -15,14 +15,19 @@ exports.getAll = async (req, res)=>{
 
 
 exports.delById = async (req, res) => {
-    await Favmovie.findByIdAndDelete(req.params.movieId)
-    res.json({_id:req.params.movieId})
+    try{ 
+      const del =  await Favmovie.deleteOne({userId:req.params.userId, movieId:req.params.movieId })
+    res.json(del)
+    }catch(e){
+        console.log(e.message)
+    }
+    
 };
 
 exports.save = async (req, res) => {
-    const find = await Favmovie.findOne({userId:req.body.userId, movieId:req.body.movieId})
+    const find = await  Favmovie.findOne({userId:req.body.userId, movieId:req.body.movieId})
     if(!find){
-        const result = await new Fav(req.body).save()
+        const result = await new Favmovie(req.body).save()
     res.json(result)
     }
    

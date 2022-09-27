@@ -19,4 +19,16 @@ audio, canvas, embed, iframe, img, object, svg, video {
 
 
 
+.profile-name{
+    display: flex;
+    justify-content: end;
+    margin: 20px 50px;
+}
+.profile-name span{
 
+    color: rgb(249, 247, 247);
+    padding: 5px  20px 5px 5px;
+    border-radius: 60px;
+    font-size: 39px;
+    
+}
