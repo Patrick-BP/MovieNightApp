@@ -49,7 +49,7 @@ app.use("/comments", CommentsRouter);
 app.use("/fav", FavRouter);
 app.use("/playlist", PlaylistRouter);
 
-const upload = multer({ storage: storage });
+const upload = multer({ storage });
 try{
   app.post("/upload", upload.single("file"), (req, res) => {
   res.status(200).json("photo has been uploaded");
