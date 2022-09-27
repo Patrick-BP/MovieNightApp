@@ -57,13 +57,7 @@ axios.put(`/movies/del/${id}`, {isDeleted:true})
                     </div>
                 </div>
             </aside>
-            <nav className="list-group">
-                <a className="list-group-item with-badge" href="#"><i className=" fa fa-th"></i>Orders<span className="badge badge-primary badge-pill">6</span></a>
-                <a className="list-group-item" href="#"><i className="fa fa-user"></i>Profile</a>
-                <a className="list-group-item" href="#"><i className="fa fa-map"></i>Addresses</a>
-                <a className="list-group-item with-badge active" href="#"><i className="fa fa-heart"></i>Wishlist<span className="badge badge-primary badge-pill">3</span></a>
-                <a className="list-group-item with-badge" href="#"><i className="fa fa-tag"></i>My Tickets<span className="badge badge-primary badge-pill">4</span></a>
-            </nav>
+           
         </div>
         <div className="col-lg-8">
             <div className="padding-top-2x mt-2 hidden-lg-up"></div>
@@ -126,10 +120,7 @@ axios.put(`/movies/del/${id}`, {isDeleted:true})
                 </table>
             </div>
             {/* <hr className="mb-4"> */}
-            <div className="custom-control custom-checkbox">
-                <input className="custom-control-input" type="checkbox" id="inform_me" />
-                <label className="custom-control-label" htmlFor="inform_me">Inform me when item from my wishlist is available</label>
-            </div>
+            
         </div>
     </div>
 </div>
