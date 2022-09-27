@@ -28,12 +28,9 @@ axios.put(`/movies/del/${id}`, {isDeleted:true})
             <tr>
               <th>Poster</th>
               <th>Title</th>
-              <th>Overview</th>
-              <th>popularity</th>
-              <th>Release - Date</th>
+              <th>overview</th>
               <th>Genre</th>
               <th>Language</th>
-              <th>Director</th>
               <th>Type</th>
               <th>Country</th>
               <th></th>
@@ -64,14 +61,12 @@ axios.put(`/movies/del/${id}`, {isDeleted:true})
 
                   <td>
                     <p className="fw-normal mb-1">
-                      {movie.overview.substring(250, 0) + "..."}
+                      {movie.overview.substring(50, 0) + "..."}
                     </p>
                   </td>
-                  <td>{movie.popularity}</td>
-                  <td>{movie.releaseDate}</td>
+                  
                   <td>{movie.genre}</td>
                   <td>{movie.language}</td>
-                  <td>{movie.director}</td>
                   <td>{movie.type}</td>
                   <td>{movie.country}</td>
                   
