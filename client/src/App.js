@@ -5,10 +5,12 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 // import MovieDetailsPage from "./pages/MovieDetailsPage";
 import LoginPage from "./pages/LoginPage";
 import HomeAdmin from './pages/HomeAdmin'
+import Home from './pages/Home'
 import { useContext } from "react";
 import { Context } from "./components/context";
 import AddMovie from "./components/admin/AddMovie";
 import ShowmovieTable from "./components/admin/ShowmovieTable"
+import MovieDetailsPage from "./pages/MovieDetailsPage";
 function App() {
   const { user} = useContext(Context)
 
@@ -16,12 +18,12 @@ function App() {
     <BrowserRouter>
     <Routes>
     
-      <Route extact path="/" element={user? <HomeAdmin></HomeAdmin> : <LoginPage />}>
+      <Route extact path="/" element={user? <Home/> : <LoginPage />}>
       <Route path="show" element={< ShowmovieTable />}></Route>
         <Route path="add" element={<AddMovie />}></Route>
 
       </Route>
-    
+    <Route path="movie/:id" element={<MovieDetailsPage/>}></Route>
 
       {/* <Route path="movie/:movieId" element={user?<MovieDetailsPage /> :  <LoginPage />}></Route> */}
 
@@ -31,8 +33,6 @@ function App() {
         element={
           <>
 
-
-          
             <div className="container fs-1 text-center">PAGE NOT FOUND </div>
             <Link to="/users">
               <p className="container fs-5 text-center">Home</p>

@@ -5,6 +5,8 @@ import axios from "axios";
 import {Context} from './context'
 
 axios.defaults.baseURL = "http://localhost:3001";
+const imgPath = "http://localhost:3001";
+
 function Movie({filter}) {
   const {user, dispatch} = useContext(Context)
   const [movies, setMovies] = useState([]);
@@ -50,7 +52,7 @@ axios.post('/fav/add', newFav)
       return (
       
         <div key={index} className="m-2 movie-box image-container">
-         {movie.smallimg ? <img src={`/movie-img/${movie.smallimg}`} alt="movie" /> :<img src={`/sample-img.png`} alt="movie" /> } 
+         {movie.smallimg ? <img src={`${imgPath}/images/${movie.smallimg}`} alt="movie" /> :<img src={`/sample-img.png`} alt="movie" /> } 
           <div className="fav" onClick={()=>favFun(movie._id)}>
             <svg style={{color:iconChange}}
               className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv"
