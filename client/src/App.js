@@ -12,6 +12,7 @@ import AddMovie from "./components/admin/AddMovie";
 import ShowmovieTable from "./components/admin/ShowmovieTable"
 import MovieDetailsPage from "./pages/MovieDetailsPage";
 import MyListPage from './pages/MyListPage'
+import SearchPage from './pages/SearchPage'
 function App() {
   const { user} = useContext(Context)
 
@@ -31,7 +32,7 @@ function App() {
       <Route path="add" element={<AddMovie />}></Route>
       </Route>
       <Route path='mylist' element={<MyListPage/>}></Route>
-
+      <Route path='search' element={<SearchPage/>}></Route>
     <Route path="movie/:id" element={<MovieDetailsPage/>}></Route>
     
     

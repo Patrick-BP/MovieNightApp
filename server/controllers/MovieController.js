@@ -18,6 +18,7 @@ exports.getById = async(req, res)=>{
     res.json(await Movie.findById(req.params.movieId))
 
 };
+
 exports.updateById = async (req, res) => {
     const result = await Movie.updateOne({_id:new ObjectId(req.params.commentId)}, req.body);
     res.json(result);

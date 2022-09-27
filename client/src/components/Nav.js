@@ -17,7 +17,7 @@ function Nav() {
             <div className="menu-title">Menu</div>
             <ul>
               <li><Link to="/" className="sideitem"><i className="fa-solid fa-house-chimney css-vubbuv icon"></i><span>Home</span></Link></li>
-              <li><a href="#" className="sideitem"><i className="fa-solid fa-magnifying-glass css-vubbuv icon"></i><span>Search</span></a></li>
+              <li><Link to="/search" className="sideitem"><i className="fa-solid fa-magnifying-glass css-vubbuv icon"></i><span>Search</span></Link></li>
               <li><Link to="/mylist" className="sideitem"><i className="fa-solid fa-heart css-vubbuv icon" ></i><span>Favorite</span></Link></li>
             </ul>
           </div>
