@@ -24,7 +24,7 @@ exports.updateById = async (req, res) => {
     res.json(result);
 };
 exports.delById = async (req, res) => {
-    await Movie.findByIdAndDelete(req.params.movieId)
+    await Movie.updateOne({_id:new ObjectId(req.params.movieId)}, req.body)
     res.json({_id:req.params.movieId})
 };
 

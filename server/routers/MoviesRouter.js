@@ -5,7 +5,7 @@ const route = express.Router();
 route.get('/', MovieController.getAll);
 route.post('/', MovieController.save);
 route.get('/:movieId', MovieController.getById);
-route.delete('/:movieId', MovieController.delById);
+route.put('/del/:movieId', MovieController.delById);
 route.put('/:movieId', MovieController.updateById);
 
 

@@ -14,7 +14,7 @@ function ShowmovieTable() {
   }, [movies]);
   
 function delfunc(id){
-axios.delete(`/movies/${id}`)
+axios.put(`/movies/del/${id}`, {isDeleted:true})
     
 }
 
