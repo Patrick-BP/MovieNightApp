@@ -24,7 +24,7 @@ function Nav() {
             <div className="menu-title">Other</div>
             <ul>
             <li><a href="#" className="sideitem"><i className="fa-solid fa-rectangle-list css-vubbuv icon"></i></a></li>
-              <li><a href="#" className="sideitem"><i className="fa-solid fa-gear css-vubbuv icon"></i></a></li>
+              <li><Link to="/profile" className="sideitem"><i className="fa-solid fa-gear css-vubbuv icon"></i></Link></li>
               <li><a href="#" onClick={logoutFunc} className="sideitem"><i className="fa-solid fa-right-from-bracket css-vubbuv icon"></i></a></li>
             </ul>
           </div>

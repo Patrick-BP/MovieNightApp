@@ -79,7 +79,7 @@ function Home() {
         {/* right-side */}
         <div className="right-side ">
          <div className="profile-name">
-          <span><i class="fa-sharp fa-solid fa-circle-user mr-3  fs-1"></i>{user.data.others.firstname}</span>
+          <span><i className="fa-sharp fa-solid fa-circle-user mr-3  fs-1"></i>{user.data.others.firstname}</span>
          </div>
           <div className="tag__box">
             <div className="tag btn btn-outline-secondary">
