@@ -24,9 +24,9 @@ function MoviePlay() {
     (async function fetch() {
       const fetchComnts = await axios.get(`/comments/${movieId.id}`)
       setListOfComments(fetchComnts.data)
-      console.log(fetchComnts);
+      
     })();
-  }, []);
+  }, [listOfList]);
 
 
   function addtolistFun(id) {
@@ -50,6 +50,28 @@ function handlechanges(e){
 function sendComnt(){
 axios.post('/comments/add', commentPost)
 }
+
+
+
+const [replyList, SetReplyList] = useState([]);
+const [parentId, setparentId] = useState();
+const [replyInput, setreplyInput] = useState({
+  userId:user.data.others._id,
+  movieId:movieId.id,
+  parent_comment_id:"",
+  comment:""
+});
+
+function handleReply(e){
+  setreplyInput({...replyInput , [e.target.name]:e.target.value})
+}
+
+
+function replyFunc(){
+  axios.post('/comments/add', replyInput)
+  
+}
+
 
   return (
     <>
@@ -192,7 +214,11 @@ axios.post('/comments/add', commentPost)
                             <div className="col-md-12">
 
 
-                            {listOfList.length > 0 && listOfList.map((cmnt, index)=>{
+                            {listOfList.length > 0 && listOfList.filter((reply)=>{
+                                      if(!reply.parent_comment_id ){
+                                        return reply
+                                      }
+                                  }).map((cmnt, index)=>{
                               return (
                                 <div key={index} className="media">
                                 <img
@@ -204,23 +230,64 @@ axios.post('/comments/add', commentPost)
                                   <div className="row">
                                     
                                     <div className="col-8 d-flex name-fcmnt">
-                                      <h5>{cmnt.userId.firstname}</h5>
-                                      <span>{cmnt.createdAt}</span>
+                                      <h5>{cmnt.userId.firstname} {cmnt.userId.lastname}</h5>
+                                      &nbsp; &nbsp;<span>{cmnt.createdAt}</span>
                                     </div>
 
                                     <div className="col-4">
                                       <div className="pull-right reply">
-                                        <a href="#">
-                                          <span>
+                                        
+                                          <span data-bs-toggle="modal" style={{cursor:"pointer"}} data-bs-target="#staticBackdrop" name="parent_comment_id" onClick={()=>setreplyInput({...replyInput , parent_comment_id:cmnt._id})}>
                                             <i className="fa fa-reply"></i>{" "}
                                             reply
                                           </span>
-                                        </a>
+                                        
+{/* ======================================== */}
+
+{/* <!-- Button trigger modal --> */}
+
+{/* <!-- Modal --> */}
+<div className=" modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div className="modal-dialog">
+    <div className="modal-content">
+      <div className="modal-header">
+        
+        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div className="modal-body">
+      <div className="form-floating">
+  <textarea className="form-control" value={replyInput.comment} onChange={handleReply} name="comment"   placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+  
+</div> 
+      </div>
+      <div className="modal-footer">
+        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" onClick={replyFunc} className="btn btn-primary">Reply</button>
+      </div>
+    </div>
+  </div>
+</div>
+{/* ============================================ */}
+
+
+
+
                                       </div>
                                     </div>
                                   </div>
                                   {cmnt.comment}
-                                  <div className="media mt-4">
+
+
+
+                                  {/* ============== Replies =============== */}
+                                  {listOfList.length > 0 && listOfList.filter((reply)=>{
+                                      if(reply.parent_comment_id && reply.parent_comment_id === cmnt._id){
+                                        return reply
+                                      }
+                                  })
+                                  .map((reply)=>{
+                                    return(
+                                      <div className="media mt-4">
                                     <a className="pr-3" href="#">
                                       <img
                                         className="rounded-circle"
@@ -231,35 +298,19 @@ axios.post('/comments/add', commentPost)
                                     <div className="media-body">
                                       <div className="row">
                                         <div className="col-12 d-flex name-cmnt">
-                                          <h5>Simona Disa</h5>
-                                          <span>- 3 hours ago</span>
+                                          <h5>{reply.userId.firstname} {reply.userId.lastname}</h5>
+                                          <span>{reply.createdAt}</span>
                                         </div>
                                       </div>
-                                      letters, as opposed to using 'Content
-                                      here, content here', making it look like
-                                      readable English.
+                                      {reply.comment}
                                     </div>
                                   </div>
-                                  <div className="media mt-3">
-                                    <a className="pr-3" href="#">
-                                      <img
-                                        className="rounded-circle"
-                                        alt="Bootstrap Media Another Preview"
-                                        src="https://i.imgur.com/nAcoHRf.jpg"
-                                      />
-                                    </a>
-                                    <div className="media-body">
-                                      <div className="row">
-                                        <div className="col-12 d-flex  name-cmnt">
-                                          <h5>John Smith</h5>
-                                          <span>- 4 hours ago</span>
-                                        </div>
-                                      </div>
-                                      the majority have suffered alteration in
-                                      some form, by injected humour, or
-                                      randomised words.
-                                    </div>
-                                  </div>
+                                    )
+                                  }) }
+                                  
+                                  {/* ==============End Replies =============== */}
+
+                                  <br/><br/>
                                 </div>
                               </div>
                               )
