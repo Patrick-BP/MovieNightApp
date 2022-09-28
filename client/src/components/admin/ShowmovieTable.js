@@ -38,7 +38,7 @@ axios.put(`/movies/del/${id}`, {isDeleted:true})
             </tr>
           </thead>
           <tbody>
-            {movies?.map((movie, index) => {
+            { movies.length >0 && movies.map((movie, index) => {
               return (
                 <tr key={index}>
                   <td>
@@ -61,7 +61,7 @@ axios.put(`/movies/del/${id}`, {isDeleted:true})
 
                   <td>
                     <p className="fw-normal mb-1">
-                      {movie.overview.substring(50, 0) + "..."}
+                      { movie.overview && movie.overview.substring(0,50) + "..."}
                     </p>
                   </td>
                   

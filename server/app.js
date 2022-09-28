@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const multer = require('multer')
 const path = require("path");
 const userRouter = require("./routers/UserRouter");
-const CommentsRouter = require("./routers/MoviesRouter");
+const CommentsRouter = require("./routers/CommentsRouter");
 const MoviesRouter = require("./routers/MoviesRouter");
 
 const FavRouter = require("./routers/FavRouter");
@@ -45,9 +45,9 @@ const storagevid = multer.diskStorage({
 app.use(authRouter);
 app.use("/users", userRouter);
 app.use("/movies", MoviesRouter);
-app.use("/comments", CommentsRouter);
 app.use("/fav", FavRouter);
 app.use("/playlist", PlaylistRouter);
+app.use("/comments", CommentsRouter);
 
 const upload = multer({ storage });
 try{

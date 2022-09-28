@@ -2,8 +2,8 @@ const Comment = require("../models/CommentModel");
 const {ObjectId} = require('mongodb');
 
 
-exports.getAll = async (req, res) => {
-  res.json(await Comment.find());
+exports.getAllComnts = async (req, res) => {
+  res.json(await Comment.find({movieId: req.params.movieId, isDeleted:false}).populate('userId'));
 };
 exports.getById = async (req, res) => {
   res.json(await Comment.findById(req.params.id));
@@ -13,7 +13,7 @@ exports.save = async (req, res, next) => {
     const result = await new Comment(req.body).save();
     res.json(result);
   } catch (error) {
-    next(error);
+    res.json(error.message);
   }
 };
 exports.updateById = async (req, res) => {

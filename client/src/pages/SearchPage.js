@@ -71,7 +71,8 @@ useEffect(()=>{
 { resSearch.length !== 0 && <div className="text-center text-secondary p-5 w-100">No Result for {searchinput}</div>}
 
 { searchinput.length > 0 && myMovies.filter((val)=>{
-    if(val.title.toLowerCase().includes(searchinput.toLowerCase())){
+  
+    if(val.title && val.title.toLowerCase().includes(searchinput.toLowerCase())){
        
         return val
     }

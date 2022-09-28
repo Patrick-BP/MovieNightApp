@@ -506,6 +506,7 @@ a:hover{
 .input-cmnt{
   margin-top: 30px;
   border: 1px solid #9d9a9a;
+  width: 92%;
 }
   .input-cmnt textarea{
     color: #f3eded;

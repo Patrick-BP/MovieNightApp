@@ -11,13 +11,23 @@ function MoviePlay() {
 
   const movieId = useParams();
   const [movieInfo, setMovieInfo] = useState({});
-
+  const [listOfList, setListOfComments] = useState([])
   useEffect(() => {
     (async function fetch() {
       const findbyId = await axios.get(`/movies/${movieId.id}`);
       setMovieInfo(findbyId.data);
+      
     })();
   }, []);
+
+  useEffect(() => {
+    (async function fetch() {
+      const fetchComnts = await axios.get(`/comments/${movieId.id}`)
+      setListOfComments(fetchComnts.data)
+      console.log(fetchComnts);
+    })();
+  }, []);
+
 
   function addtolistFun(id) {
     const movieid = id;
@@ -26,6 +36,21 @@ function MoviePlay() {
 
     axios.post("/playlist/add", newlist);
   }
+
+
+
+const [commentPost, setCommnet] =useState({
+  userId: user.data.others._id,
+  movieId:movieId.id,
+  comment:""
+})
+function handlechanges(e){
+  setCommnet({...commentPost, [e.target.name]: e.target.value})
+}
+function sendComnt(){
+axios.post('/comments/add', commentPost)
+}
+
   return (
     <>
       {movieInfo.videourl && (
@@ -136,19 +161,28 @@ function MoviePlay() {
             <div className="video-comment">
               <h4>
                 {" "}
-                <span className="numOfCmnts">17</span>Comments:
+                <span className="numOfCmnts">{listOfList.length}</span>Comments:
               </h4>
-              <div className="input-cmnt rounded-pill d-flex">
+              <div className="d-flex">
+                <div className="input-cmnt rounded-pill d-flex">
                 <i className="fa-sharp fa-solid fa-circle-user user-icon"></i>
                 <textarea
                   type="text"
                   rows="1"
+                  name="comment"
                   className="form-control-plaintext"
                   placeholder="Plaintext input"
+                  value={commentPost.comment}
+                  onChange={handlechanges}
                 />
               </div>
+              <span style={{fontSize:"3rem", marginLeft:"20px", cursor:"pointer"}} onClick={sendComnt} className=" align-self-center mt-4 pl-3 material-symbols-outlined">
+                send
+                </span>
+              </div>
+              
 
-              <div>
+             {listOfList.length > 0 ? <div>
                 <div className="cmnt">
                   <div className=" mb-5 mt-5">
                     <div className="card">
@@ -156,7 +190,11 @@ function MoviePlay() {
                         <div className="col-md-12">
                           <div className="row">
                             <div className="col-md-12">
-                              <div className="media">
+
+
+                            {listOfList.length > 0 && listOfList.map((cmnt, index)=>{
+                              return (
+                                <div key={index} className="media">
                                 <img
                                   className="mr-3 rounded-circle"
                                   alt="Bootstrap Media Preview"
@@ -164,9 +202,10 @@ function MoviePlay() {
                                 />
                                 <div className="media-body">
                                   <div className="row">
+                                    
                                     <div className="col-8 d-flex name-fcmnt">
-                                      <h5>Maria Smantha</h5>
-                                      <span>- 2 hours ago</span>
+                                      <h5>{cmnt.userId.firstname}</h5>
+                                      <span>{cmnt.createdAt}</span>
                                     </div>
 
                                     <div className="col-4">
@@ -180,9 +219,7 @@ function MoviePlay() {
                                       </div>
                                     </div>
                                   </div>
-                                  It is a long established fact that a reader
-                                  will be distracted by the readable content of
-                                  a page.
+                                  {cmnt.comment}
                                   <div className="media mt-4">
                                     <a className="pr-3" href="#">
                                       <img
@@ -225,99 +262,10 @@ function MoviePlay() {
                                   </div>
                                 </div>
                               </div>
+                              )
+                            })}  
 
-                              <div className="media mt-4 ">
-                                <img
-                                  className="mr-3 rounded-circle"
-                                  alt="Bootstrap Media Preview"
-                                  src="https://i.imgur.com/xELPaag.jpg"
-                                />
-                                <div className="media-body">
-                                  <div className="row">
-                                    <div className="  col-8 d-flex name-fcmnt">
-                                      <h5>Shad f</h5>
-                                      <span>- 2 hours ago</span>
-                                    </div>
-
-                                    <div className="col-4">
-                                      <div className="pull-right reply">
-                                        <a href="#">
-                                          <span>
-                                            <i className="fa fa-reply"></i>{" "}
-                                            reply
-                                          </span>
-                                        </a>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  The standard chunk of Lorem Ipsum used since
-                                  the 1500s is reproduced below for those
-                                  interested. Sections 1.10.32 and 1.10.33.
-                                  <div></div>
-                                  <div className="media mt-4 ">
-                                    <a className="pr-3" href="#">
-                                      <img
-                                        className="rounded-circle"
-                                        alt="Bootstrap Media Another Preview"
-                                        src="https://i.imgur.com/nUNhspp.jpg"
-                                      />
-                                    </a>
-                                    <div className="media-body">
-                                      <div className="row">
-                                        <div className="col-12 d-flex  name-cmnt">
-                                          <h5>Andy flowe</h5>
-                                          <span>- 5 hours ago</span>
-                                        </div>
-                                      </div>
-                                      Cras sit amet nibh libero, in gravida
-                                      nulla. Nulla vel metus scelerisque ante
-                                      sollicitudin commodo. Cras purus odio,
-                                      vestibulum in vulputate at, tempus viverra
-                                      turpis.
-                                    </div>
-                                  </div>
-                                  <div className="media mt-3">
-                                    <a className="pr-3" href="#">
-                                      <img
-                                        className="rounded-circle"
-                                        alt="Bootstrap Media Another Preview"
-                                        src="https://i.imgur.com/HjKTNkG.jpg"
-                                      />
-                                    </a>
-                                    <div className="media-body">
-                                      <div className="row">
-                                        <div className="col-12 d-flex  name-cmnt">
-                                          <h5>Simp f</h5>
-                                          <span>- 5 hours ago</span>
-                                        </div>
-                                      </div>
-                                      a Latin professor at Hampden-Sydney
-                                      College in Virginia, looked up one of the
-                                      more obscure Latin words, consectetur
-                                    </div>
-                                  </div>
-                                  <div className="media mt-3">
-                                    <a className="pr-3" href="#">
-                                      <img
-                                        className="rounded-circle"
-                                        alt="Bootstrap Media Another Preview"
-                                        src="https://i.imgur.com/nAcoHRf.jpg"
-                                      />
-                                    </a>
-                                    <div className="media-body">
-                                      <div className="row">
-                                        <div className="col-12 d-flex  name-cmnt">
-                                          <h5>John Smith</h5>
-                                          <span>- 4 hours ago</span>
-                                        </div>
-                                      </div>
-                                      the majority have suffered alteration in
-                                      some form, by injected humour, or
-                                      randomised words.
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
+                              
                             </div>
                           </div>
                         </div>
@@ -325,7 +273,9 @@ function MoviePlay() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>:<div className="text-center m-4 w-100 text-secondary"><h3>No Comments yet</h3></div> }
+
+
             </div>
           </div>
         </div>

@@ -4,13 +4,14 @@
 /node_modules
 /.pnp
 .pnp.js
+/videos
 
 # testing
 /coverage
 
 # production
 /build
-
+/videos
 # misc
 .DS_Store
 .env.local
