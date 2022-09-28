@@ -53,8 +53,8 @@ axios.post('/fav/add', newFav)
       
         <div key={index} className="m-2 movie-box image-container">
          {movie.smallimg ? <img src={`${imgPath}/images/${movie.smallimg}`} alt="movie" /> :<img src={`/sample-img.png`} alt="movie" /> } 
-          <div className="fav" onClick={()=>favFun(movie._id)}>
-            <svg style={{color:iconChange}}
+          <div title ="Add to favorite" className="fav" onClick={()=>favFun(movie._id)}>
+            <svg style={{color:"red"}}
               className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv"
               focusable="false"
               aria-hidden="true"

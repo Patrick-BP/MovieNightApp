@@ -53,11 +53,11 @@ axios.delete(`/fav/${user.data.others._id}/${id}`)
       return (
         <div key={index}  className="m-2 movie-box image-container">
          <img src={`${urlPath}/images/${movie.movieId.smallimg}`} alt="movie" />  
-          <div className="fav" onClick={()=>remfavFunc(movie.movieId._id)}>
-          <span class="material-symbols-outlined text-danger ">disabled_by_default</span>
+          <div className="fav" title ="Remove from favorite"  onClick={()=>remfavFunc(movie.movieId._id)}>
+          <span className="material-symbols-outlined text-danger ">disabled_by_default</span>
 
           </div>
-          <Link  to={`/movie/${movie.movieId._id}`}>
+          <Link title ="Click to watch this movie"  to={`/movie/${movie.movieId._id}`}>
           <div className="overlay ">
             <div className="movie-title">{movie.movieId.title}</div>
             <div className="d-flex flex-row  justify-content-between">
