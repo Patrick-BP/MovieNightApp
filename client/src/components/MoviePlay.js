@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import "../App.css";
+import moment from "moment";
 import { Context } from "./context";
 axios.defaults.baseURL = "http://localhost:3001";
 
@@ -38,7 +39,7 @@ function MoviePlay() {
   }
 
 
-
+let time;
 const [commentPost, setCommnet] =useState({
   userId: user.data.others._id,
   movieId:movieId.id,
@@ -231,7 +232,8 @@ function replyFunc(){
                                     
                                     <div className="col-8 d-flex name-fcmnt">
                                       <h5>{cmnt.userId.firstname} {cmnt.userId.lastname}</h5>
-                                      &nbsp; &nbsp;<span>{cmnt.createdAt}</span>
+                                      &nbsp; &nbsp;<span>{moment(cmnt.createdAt).fromNow() }</span>
+            
                                     </div>
 
                                     <div className="col-4">
@@ -299,7 +301,7 @@ function replyFunc(){
                                       <div className="row">
                                         <div className="col-12 d-flex name-cmnt">
                                           <h5>{reply.userId.firstname} {reply.userId.lastname}</h5>
-                                          <span>{reply.createdAt}</span>
+                                         &nbsp;&nbsp; &nbsp;<span>{moment(reply.createdAt).fromNow()}</span>
                                         </div>
                                       </div>
                                       {reply.comment}
