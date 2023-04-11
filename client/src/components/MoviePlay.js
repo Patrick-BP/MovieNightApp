@@ -72,7 +72,19 @@ function replyFunc(){
   axios.post('/comments/add', replyInput)
   
 }
+const [more, setmore] = useState(true);
+function truncate(string, n){
+  if(string.length > n){
+    return   string.substr(0, n-1) + '...'
+  }else{
+    return string
+  }
 
+}
+function readmore(){
+  setmore((prev)=> !prev)
+  console.log(more);
+}
 
   return (
     <>
@@ -154,7 +166,11 @@ function replyFunc(){
                 </div>
 
                 <div className="info">
-                  <p>{movieInfo.overview}</p>
+                  <p>
+                  { movieInfo.overview && more ?<span>{truncate(movieInfo.overview, 300) }<button onClick={readmore} className="bg-secondary text-light px-2">+ More</button></span>:
+                      <span> {movieInfo.overview} <button onClick={readmore} className="bg-secondary text-light px-2"><b>-</b> less</button></span>}
+                    
+                  </p>
 
                   <table className="table text-light">
                     <tbody>

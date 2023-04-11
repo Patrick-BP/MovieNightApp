@@ -3,12 +3,17 @@ const User = require("../models/userModel");
 const Response = require("../models/responseobj");
 const { ObjectId } = require("mongodb");
 
+
 exports.getAllUsers = async (req, res) => {
   res.json(await User.find());
 };
+
+
+
 exports.getOneUser = async (req, res) => {
   res.json(await User.findById(req.params.id));
 };
+
 exports.saveUser = async (req, res, next) => {
   try {
     const salt = await bcrypt.genSalt(10);
@@ -36,3 +41,5 @@ exports.deleteOneUser = async (req, res) => {
   await User.findByIdAndDelete(req.params.id);
   res.json({ _id: req.params.id });
 };
+
+

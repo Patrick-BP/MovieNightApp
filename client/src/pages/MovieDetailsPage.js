@@ -114,7 +114,7 @@ function MovieDetailsPage() {
         {/*end right-side */}
       </div>
 
-      {/* <footer className="footer ">footer</footer> */}
+  
     </div>
   );
 }
